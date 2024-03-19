@@ -14,7 +14,7 @@ const { menu } = Astro.props;
 ---
 
 <header
-  class="w-full h-12 md:px-10 md:py-2 bg-slate-800 text-white flex flex-row justify-between"
+  class="w-full h-16 md:px-14 px-5 md:py-2 bg-slate-800 text-white flex flex-row justify-between items-center"
 >
   <a href="/"
     ><Image
@@ -26,7 +26,7 @@ const { menu } = Astro.props;
       height={32}
     /></a
   >
-  <ul class="flex gap-3">
+  <ul class="hidden md:flex md:gap-3">
     {
       menu.map((menuItem, idx) => (
         <li>
@@ -35,4 +35,57 @@ const { menu } = Astro.props;
       ))
     }
   </ul>
+  <Image
+    loading="lazy"
+    src="/assets/menu.svg"
+    width={28}
+    height={28}
+    alt="menu icon"
+    class="cursor-pointer md:hidden"
+    id="menu-icon"
+  />
+  <div class="absolute z-10 hidden w-full h-full top-0 left-0 bg-black/50" id="menu">
+    <nav class="w-96 h-full bg-slate-700 px-5 flex flex-col">
+      <b class="text-3xl cursor-pointer" id="close-icon">&times;</b>
+      <ul class="mt-2 flex flex-col gap-3">
+        {
+          menu.map((menuItem, idx) => (
+            <li>
+              <a href={menuItem.link}>{menuItem.title}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+  <script>
+    const menu = document.querySelector<HTMLDivElement>("#menu");
+    const menuIcon = document.querySelector<HTMLImageElement>("#menu-icon")!;
+    const closeIcon = document.querySelector<HTMLDivElement>("#close-icon")!;
+
+    function openMenu() {
+      menu.classList.remove("hidden");
+      menu.classList.add("flex");
+      menu.classList.add("justify-end");
+    }
+
+    function closeMenu() {
+      menu.classList.add("hidden");
+      menu.classList.remove("flex");
+      menu.classList.remove("justify-end");
+    }
+
+    menuIcon.addEventListener("click", () => {
+      openMenu();
+    });
+
+    closeIcon.addEventListener("click", () => {
+      closeMenu();
+    });
+
+    menu.addEventListener("click", (evt) => {
+      evt.stopPropagation();
+      closeMenu();
+    });
+  </script>
 </header>

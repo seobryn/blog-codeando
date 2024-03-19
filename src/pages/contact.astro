@@ -1,22 +1,53 @@
 ---
-import Input from '../components/Input.astro'
-import Layout from '../layouts/Layout.astro'
+import Input from "../components/Input.astro";
+import Textarea from "../components/Textarea.astro";
+import Button from "../components/Button.astro";
+import Layout from "../layouts/Layout.astro";
 ---
-<Layout title='Contact Me' description='The Codeando Contact Page'>
-    <form class="flex flex-col items-center justify-center w-full h-full">
-        <h1 class="md:text-4xl">Contact</h1>
-        <Input type="text" placeholder="Your Name" required />
-        <Input
-          name="email"
-          type="email"
-          pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-          placeholder="Your Email"
-          required
-        />
-        <Input name="subject" type="text" placeholder="Subject" />
-        <textarea name="message" required></textarea>
-      
-        <button type="submit">Send Message</button>
-      </form>
-      
+
+<Layout title="Contact Me" description="The Codeando Contact Page">
+  <form
+    class="flex flex-col items-center justify-center self-center gap-5 md:w-96 w-full md:bg-slate-200 px-10 md:p-5 my-auto rounded"
+    id="contact-form"
+  >
+    <h1 class="md:text-4xl text-3xl">Contáctame</h1>
+    <Input
+      name="name"
+      type="text"
+      title="Hace falta tu nombre"
+      placeholder="Aquí tu nombre"
+      required
+    />
+    <Input
+      name="email"
+      type="email"
+      title="Escribe un email válido"
+      placeholder="Aquí tu email"
+      pattern="[a-zA-Z0-9\._%+-]+@[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+    />
+    <Input name="subject" type="text" placeholder="Tema" />
+    <Textarea
+      name="message"
+      title="Hace falta el mensaje"
+      placeholder="Escribe aqui tu mensaje..."
+      required
+    />
+
+    <Button type="submit">Enviar mensaje</Button>
+  </form>
+  <script>
+    const contactForm =
+      document.querySelector<HTMLFormElement>("#contact-form")!;
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(event.target as HTMLFormElement);
+      const formData = {
+        name: data.get("name"),
+        email: data.get("email"),
+        subject: data.get("subject"),
+        message: data.get("message"),
+      };
+      console.log(formData);
+    });
+  </script>
 </Layout>

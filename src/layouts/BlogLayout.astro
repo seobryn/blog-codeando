@@ -1,0 +1,41 @@
+---
+import Navigation from "../components/Navigation.astro";
+import { MENU } from "../constants";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+	<style is:inline>
+		main h1 {
+		  font-size: 1.875rem;
+		  line-height: 2.25rem;
+		}
+  
+		@media (min-width: 768px) {
+		  main h1 {
+			font-size: 2.25rem;
+			line-height: 2.5rem;
+		  }
+		}
+	  </style>
+  </head>
+  <body class="h-screen flex flex-col relative">
+    <Navigation menu={MENU} />
+    <main class="flex flex-col md:p-10 p-5 gap-3">
+      <slot />
+    </main>
+  </body>
+</html>

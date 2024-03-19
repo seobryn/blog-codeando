@@ -1,11 +1,42 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import PostList from "../components/PostList.astro";
+import { Image } from "astro:assets";
 ---
 
-<Layout 
-	title="Blog de Codeando" 
-	description='Encuentra contenido de desarrollo web y móvil, ejemplos y demos.'>
-	<main>
-		
-	</main>
+<Layout
+  title="Codeando Blog"
+  description="Encuentra contenido de desarrollo web y móvil, ejemplos y demos codeando."
+>
+  <main>
+    <Hero>
+      <Image
+        src="/assets/hero-image.jpg"
+        alt="Hero image for codeando blog."
+        width={400}
+        height={400}
+        class="w-full h-full self-center aspect-video"
+      />
+      <section
+        class="absolute top-0 left-0 flex items-end w-full h-full bg-slate-800/50 md:p-12 p-5"
+      >
+        <h1 class="md:text-4xl text-3xl text-white text-balance">
+          Codeando: Descubre las últimas tendencias <br />
+          <span class="text-white/70">en Desarrollo Web y Móvil Híbrido</span>
+        </h1>
+      </section>
+      <section class="w-full h-full md:p-10 p-5 flex">
+        <article>
+          <h3 class="text-2xl">Articulos mas recientes</h3>
+          <PostList />
+        </article>
+      </section>
+    </Hero>
+  </main>
 </Layout>
+<style is:global>
+  :root {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+</style>

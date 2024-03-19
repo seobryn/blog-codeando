@@ -1,12 +1,29 @@
 ---
 interface Props {
+  required?: boolean;
   type?: astroHTML.JSX.HTMLInputTypeAttribute;
   placeholder?: string;
   name?: string;
-  required: boolean;
+  pattern?: string;
+  title?: string;
 }
 
-const { required, placeholder, type = "text", name } = Astro.props;
+const {
+  required,
+  placeholder,
+  pattern,
+  title,
+  type = "text",
+  name,
+} = Astro.props;
 ---
 
-<input type={type} placeholder={placeholder} required={required} name={name} class="h-9 px-3 border border-slate-900 rounded-md my-1 focus:border-slate-600 focus:border-2 outline-none" />
+<input
+  type={type}
+  title={title}
+  placeholder={placeholder}
+  pattern={pattern}
+  required={required}
+  name={name}
+  class="w-full h-9 px-3 border border-slate-900 rounded-md focus:border-slate-600 focus:border-2 outline-none"
+/>
