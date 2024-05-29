@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import PostList from "../components/PostList.astro";
-import { Image } from "astro:assets";
 ---
 
 <Layout
@@ -11,11 +10,10 @@ import { Image } from "astro:assets";
 >
   <main>
     <Hero>
-      <Image
+      <img
+        loading="lazy"
         src="/assets/hero-image.jpg"
         alt="Hero image for codeando blog."
-        width={400}
-        height={400}
         class="w-full h-full self-center aspect-video"
       />
       <section
@@ -26,13 +24,13 @@ import { Image } from "astro:assets";
           <span class="text-white/70">en Desarrollo Web y Móvil Híbrido</span>
         </h1>
       </section>
-      <section class="w-full h-full md:p-10 p-5 flex">
-        <article>
-          <h3 class="text-2xl">Articulos mas recientes</h3>
-          <PostList />
-        </article>
-      </section>
     </Hero>
+    <section class="w-full h-full md:p-10 p-5 flex">
+      <article>
+        <h3 class="text-2xl">Articulos mas recientes</h3>
+        <PostList />
+      </article>
+    </section>
   </main>
 </Layout>
 <style is:global>
